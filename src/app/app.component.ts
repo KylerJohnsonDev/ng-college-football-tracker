@@ -6,8 +6,5 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   template: ` <router-outlet></router-outlet> `,
-  styles: [],
 })
-export class AppComponent {
-  title = 'ng-college-football-tracker';
-}
+export class AppComponent {}
