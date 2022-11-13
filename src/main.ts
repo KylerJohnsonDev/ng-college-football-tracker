@@ -6,7 +6,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { routes } from './routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
+import { provideStore } from '@ngrx/store';
 
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter(routes), provideHttpClient(), importProvidersFrom(BrowserAnimationsModule)],
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    importProvidersFrom(BrowserAnimationsModule),
+    provideStore(),
+  ],
 }).catch((err) => console.error(err));
