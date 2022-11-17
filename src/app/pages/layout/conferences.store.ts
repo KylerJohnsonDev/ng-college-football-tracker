@@ -76,7 +76,7 @@ const { selectAll } = adapter.getSelectors();
 
 const { selectLoading, selectError } = conferencesFeature;
 
-export const teamsByConferenceSelectors = {
+export const conferencesSelectors = {
   selectConferences: selectAll,
   selectLoading,
   selectError,
