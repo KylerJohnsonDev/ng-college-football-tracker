@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './app/pages/layout/layout.component';
-import { DashboardComponent } from './app/pages/dashboard/dashboard.component';
+import { ConferencesComponent } from './app/pages/conferences/conferences.component';
 import { ConferencesService } from './app/pages/layout/conferences.service';
 import { ConferencesStore } from './app/pages/layout/conferences.store';
 import { provideComponentStore } from '@ngrx/component-store';
@@ -11,8 +11,8 @@ export const routes: Routes = [
     component: LayoutComponent,
     providers: [ConferencesService, provideComponentStore(ConferencesStore)],
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
+      { path: 'conferences', component: ConferencesComponent },
+      { path: '', pathMatch: 'full', redirectTo: '/conferences' },
     ],
   },
 ];

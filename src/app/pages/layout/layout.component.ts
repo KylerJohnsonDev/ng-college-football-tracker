@@ -18,7 +18,6 @@ import { ConferencesStore } from './conferences.store';
           <h2>Football Tracker</h2>
         </mat-drawer>
         <mat-drawer-content>
-          {{ vm$ | json }}
           <router-outlet></router-outlet>
         </mat-drawer-content>
       </mat-drawer-container>
@@ -38,7 +37,4 @@ import { ConferencesStore } from './conferences.store';
     `,
   ],
 })
-export class LayoutComponent {
-  vm$ = this.conferencesStore.conferencesState$;
-  constructor(private conferencesStore: ConferencesStore) {}
-}
+export class LayoutComponent {}
