@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { Store } from '@ngrx/store';
-import { Conference } from 'src/app/models/conference.model';
-import { Observable } from 'rxjs';
-import { conferencesSelectors } from './conferences.store';
+import { ConferencesStore } from './conferences.store';
 
 @Component({
   selector: 'app-layout',
@@ -21,6 +18,7 @@ import { conferencesSelectors } from './conferences.store';
           <h2>Football Tracker</h2>
         </mat-drawer>
         <mat-drawer-content>
+          {{ vm$ | json }}
           <router-outlet></router-outlet>
         </mat-drawer-content>
       </mat-drawer-container>
@@ -41,16 +39,6 @@ import { conferencesSelectors } from './conferences.store';
   ],
 })
 export class LayoutComponent {
-  vm$: Observable<{
-    loading: boolean;
-    error: string | null;
-    conferences: Conference[];
-  }>;
-  constructor(private store: Store) {
-    this.vm$ = this.store.select({
-      loading: conferencesSelectors.selectLoading,
-      error: conferencesSelectors.selectError,
-      conferences: conferencesSelectors.selectConferences,
-    });
-  }
+  vm$ = this.conferencesStore.conferencesState$;
+  constructor(private conferencesStore: ConferencesStore) {}
 }
