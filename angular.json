@@ -13,7 +13,8 @@
           "inlineTemplate": true,
           "skipImport": true,
           "flat": true,
-          "skipTests": true
+          "skipTests": true,
+          "displayBlock": true
         }
       },
       "root": "",

@@ -1,59 +1,4 @@
-@use "@angular/material" as mat;
-
-@include mat.core();
-
-// Define a light theme
-$light-primary: mat.define-palette(mat.$light-blue-palette, 400, 300, 500);
-$light-accent: mat.define-palette(mat.$pink-palette);
-$light-warn: mat.define-palette(mat.$red-palette, 400, 300, 500);
-$light-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $light-primary,
-      accent: $light-accent,
-      warn: $light-warn,
-    ),
-  )
-);
-
-// Define a dark theme
-$dark-background-palette: mat.define-palette(
-  mat.$blue-grey-palette,
-  800,
-  700,
-  900
-);
-$dark-primary: mat.define-palette(mat.$light-blue-palette, 300, 200, 400);
-$dark-accent: mat.define-palette(mat.$light-blue-palette, 300, 200, 400);
-$dark-warn: mat.define-palette(mat.$red-palette, 300, 200, 400);
-$dark-theme: mat.define-dark-theme(
-  (
-    color: (
-      primary: $dark-primary,
-      accent: $dark-accent,
-      warn: $dark-warn,
-    ),
-  )
-);
-
-// Apply the dark theme by default
-@include mat.core-theme($dark-theme);
-@include mat.button-theme($dark-theme);
-
-// Apply the light theme only when the `.my-light-theme` CSS class is applied
-// to an ancestor element of the components (such as `body`).
-.my-light-theme {
-  @include mat.core-color($light-theme);
-  @include mat.button-color($light-theme);
-}
-
-/* You can add global styles to this file, and also import other style files */
-
-$dark-background: mat.get-color-from-palette(
-  $dark-background-palette,
-  "darker"
-);
-$dark-text: mat.get-color-from-palette(mat.$blue-grey-palette, 50);
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html,
 body {
@@ -61,9 +6,6 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: $dark-background;
-  color: $dark-text;
 }
 * {
   box-sizing: border-box;
