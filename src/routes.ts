@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './app/pages/layout/layout.component';
-import { ConferencesComponent } from './app/pages/conferences/conferences.component';
-import { ConferencesService } from './app/pages/layout/conferences.service';
-import { ConferencesStore } from './app/pages/layout/conferences.store';
+import { LayoutComponent } from './app/pages/_layout/layout.component';
+import { ConferencesComponent } from './app/pages/conferences.component';
+import { ConferencesService } from './app/pages/_layout/conferences.service';
+import { ConferencesStore } from './app/pages/_layout/conferences.store';
 import { provideComponentStore } from '@ngrx/component-store';
 
 export const routes: Routes = [
@@ -12,6 +12,11 @@ export const routes: Routes = [
     providers: [ConferencesService, provideComponentStore(ConferencesStore)],
     children: [
       { path: 'conferences', component: ConferencesComponent },
+      {
+        path: 'teams',
+        loadComponent: () =>
+          import('./app/pages/teams.component').then((c) => c.TeamsComponent),
+      },
       { path: '', pathMatch: 'full', redirectTo: '/conferences' },
     ],
   },

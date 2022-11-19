@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable } from 'rxjs';
 import { Conference } from 'src/app/models/conference.model';
+import { Team } from 'src/app/models/team.model';
 import { ConferencesService } from './conferences.service';
 
 export interface ConferencesState {
@@ -25,6 +26,41 @@ export class ConferencesStore extends ComponentStore<ConferencesState> {
 
   readonly conferencesState$: Observable<ConferencesState> = this.select(
     (state) => state
+  );
+
+  readonly loading$: Observable<boolean> = this.select(
+    (state) => state.loading
+  );
+
+  readonly conferencesCount$: Observable<number> = this.select(
+    (state) => state.conferences.length
+  );
+
+  readonly teams$: Observable<Team[]> = this.select((state) => {
+    return state.conferences
+      .map((conference) => conference.Teams)
+      .flat()
+      .sort((a, b) => a.School.localeCompare(b.School));
+  });
+
+  readonly teamCount$: Observable<number> = this.select(
+    this.teams$,
+    (teams) => teams.length
+  );
+
+  readonly layoutVM$ = this.select(
+    this.conferencesCount$,
+    this.teamCount$,
+    (conferencesCount, teamsCount) => ({ conferencesCount, teamsCount })
+  );
+
+  readonly teamsVM$ = this.select(
+    this.teams$,
+    this.loading$,
+    (teams, loading) => ({
+      teams,
+      loading,
+    })
   );
 
   ngrxOnStoreInit() {
