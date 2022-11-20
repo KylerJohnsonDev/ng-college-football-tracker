@@ -36,6 +36,8 @@ import { LetModule } from '@ngrx/component';
               <a mat-list-item routerLink="/teams"
                 >Teams ({{ vm.teamsCount }})</a
               >
+              <a mat-list-item>CFP Rankings</a>
+              <a mat-list-item>Team Matchup</a>
             </mat-nav-list>
           </mat-drawer>
           <mat-drawer-content>
@@ -69,7 +71,7 @@ import { LetModule } from '@ngrx/component';
             height: 100%;
 
             .mat-drawer {
-              width: 10%;
+              width: 12%;
             }
           }
         }

@@ -9,12 +9,14 @@ import { LetModule } from '@ngrx/component';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-conferences',
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     MatCardModule,
     LetModule,
     MatProgressSpinnerModule,
@@ -25,11 +27,16 @@ import { MatDividerModule } from '@angular/material/divider';
       <h2 class="page-header">Conferences</h2>
       <mat-divider class="divider"></mat-divider>
       <section class="conference-cards" *ngIf="!vm.loading; else loading">
-        <mat-card *ngFor="let conference of vm.conferences">
-          <mat-card-header>
-            <mat-card-title>{{ conference.Name }}</mat-card-title>
-          </mat-card-header>
-        </mat-card>
+        <a
+          [routerLink]="['/teams-by-conference', conference.ConferenceID]"
+          *ngFor="let conference of vm.conferences"
+        >
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{ conference.Name }}</mat-card-title>
+            </mat-card-header>
+          </mat-card>
+        </a>
       </section>
       <ng-template #loading>
         <div class="loading-container">
@@ -59,6 +66,11 @@ import { MatDividerModule } from '@angular/material/divider';
           display: grid;
           gap: 1rem;
           grid-template-columns: repeat(4, 1fr);
+
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
         }
       }
     `,

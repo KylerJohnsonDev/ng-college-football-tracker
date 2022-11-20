@@ -13,6 +13,13 @@ export const routes: Routes = [
     children: [
       { path: 'conferences', component: ConferencesComponent },
       {
+        path: 'teams-by-conference/:conferenceId',
+        loadComponent: () =>
+          import('./app/pages/teams-by-conference.component').then(
+            (c) => c.TeamsByConferenceComponent
+          ),
+      },
+      {
         path: 'teams',
         loadComponent: () =>
           import('./app/pages/teams.component').then((c) => c.TeamsComponent),

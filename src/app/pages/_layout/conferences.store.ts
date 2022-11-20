@@ -63,6 +63,21 @@ export class ConferencesStore extends ComponentStore<ConferencesState> {
     })
   );
 
+  readonly teamsByConferenceVM$ = (conferenceId: number) => {
+    return this.select(this.conferencesState$, (state) => {
+      const conference = state.conferences.find(
+        (conference) => conference.ConferenceID === conferenceId
+      );
+      return {
+        conferenceName: conference?.Name,
+        teams: conference?.Teams ?? [],
+        totalCount: conference?.Teams?.length ?? 0,
+        loading: state.loading,
+        error: state.error,
+      };
+    });
+  };
+
   ngrxOnStoreInit() {
     this.loadConferences();
   }
