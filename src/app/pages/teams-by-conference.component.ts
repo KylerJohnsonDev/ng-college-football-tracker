@@ -6,6 +6,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { LetModule } from '@ngrx/component';
 import { switchMap } from 'rxjs';
+import { TableColumnsToolComponent } from '../components/table-columns-tool.component';
+import { TableLayoutComponent } from '../components/table-layout.component';
+import { TableToolPanelLayoutComponent } from '../components/table-tool-panel-layout.component';
 import { TeamsTableComponent } from '../components/teams-table.component';
 import { ConferencesStore } from './_layout/conferences.store';
 
@@ -20,19 +23,25 @@ import { ConferencesStore } from './_layout/conferences.store';
     MatCardModule,
     MatProgressSpinnerModule,
     TeamsTableComponent,
+    TableLayoutComponent,
+    TableToolPanelLayoutComponent,
+    TableColumnsToolComponent,
   ],
   template: `
     <main *ngrxLet="vm$; let vm">
-      <h2 class="page-header">{{ vm.conferenceName }}</h2>
-      <mat-divider class="divider"></mat-divider>
-      <section class="table-container" *ngIf="!vm.loading; else loading">
+      <table-layout [hasToolPanel]="true">
+        <section tableHeader class="table-header">
+          <h2 class="page-header">{{ vm.conferenceName }}</h2>
+          <p tableHeader>{{ vm.totalCount }} Results</p>
+        </section>
         <teams-table
+          table
           tableId="teams-by-conference-table"
           [loading]="vm.loading"
           [dataSource]="vm.teams"
           [totalCount]="vm.totalCount"
         ></teams-table>
-      </section>
+      </table-layout>
       <ng-template #loading>
         <div class="loading-container">
           <mat-spinner color="primary"></mat-spinner>
@@ -44,10 +53,16 @@ import { ConferencesStore } from './_layout/conferences.store';
     `
       main {
         height: 100%;
-        padding: 0 1rem 1rem 1rem;
 
-        .divider {
-          margin-bottom: 1rem;
+        .table-header {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          h2 {
+            margin: 0 0 1rem 0;
+          }
         }
 
         .loading-container {
@@ -55,12 +70,6 @@ import { ConferencesStore } from './_layout/conferences.store';
           display: flex;
           flex-direction: row;
           justify-content: center;
-        }
-
-        .teams-cards {
-          display: grid;
-          gap: 1rem;
-          grid-template-columns: repeat(4, 1fr);
         }
       }
     `,

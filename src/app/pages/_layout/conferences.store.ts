@@ -70,7 +70,7 @@ export class ConferencesStore extends ComponentStore<ConferencesState> {
       );
       return {
         conferenceName: conference?.Name,
-        teams: conference?.Teams ?? [],
+        teams: conference?.Teams.sort((a, b) => b.Wins - a.Wins) ?? [],
         totalCount: conference?.Teams?.length ?? 0,
         loading: state.loading,
         error: state.error,

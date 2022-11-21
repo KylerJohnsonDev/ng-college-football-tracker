@@ -40,7 +40,7 @@ import { LetModule } from '@ngrx/component';
               <a mat-list-item>Team Matchup</a>
             </mat-nav-list>
           </mat-drawer>
-          <mat-drawer-content>
+          <mat-drawer-content class="mat-drawer-content">
             <router-outlet></router-outlet>
           </mat-drawer-content>
         </mat-drawer-container>
@@ -72,6 +72,10 @@ import { LetModule } from '@ngrx/component';
 
             .mat-drawer {
               width: 12%;
+            }
+
+            .mat-drawer-content {
+              padding: 1rem;
             }
           }
         }
